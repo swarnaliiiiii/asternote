@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
+import 'camera.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
+      home: HomeScreen(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
-      ),
-      body: const Center(
-        child: Text('Hello, Flutter!'),
+      appBar: AppBar(title: Text("Home Screen")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CameraScreen()),
+            );
+          },
+          child: Text("Open Camera"),
+        ),
       ),
     );
   }
