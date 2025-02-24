@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/camera.dart';
+import 'package:frontend/app/app.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Builder(
-        builder: (context) {
-          Future.microtask(() => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CameraScreen()),
-              ));
-          return const Scaffold(); 
-        },
-      ),
-    );
-  }
+void main() {
+  runApp(const MyApp());
 }
