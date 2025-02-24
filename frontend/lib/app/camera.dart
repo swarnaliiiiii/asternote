@@ -10,8 +10,6 @@ class CameraScreen extends StatefulWidget {
 }
 
 class CameraScreenState extends State<CameraScreen> {
-  final String pickImageHero = 'pickImageHero';
-  final String captureImageHero = 'captureImageHero';
   File? image;
 
   Future<void> _captureFromCamera() async {
@@ -42,22 +40,19 @@ class CameraScreenState extends State<CameraScreen> {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Hero(tag: pickImageHero, child: FloatingActionButton(
+          FloatingActionButton(
             onPressed: _pickImagefromGallery,
             tooltip: 'Pick Image',
             child: Icon(Icons.photo),
-          ),),
+          ),
           SizedBox(
             width: 20,
           ),
-          Hero(
-            tag: captureImageHero,
-            child:
           FloatingActionButton(
             onPressed: _captureFromCamera,
             tooltip: 'Capture Image',
             child: Icon(Icons.camera),
-          ),),
+          ),
         ],
       ),
     );
