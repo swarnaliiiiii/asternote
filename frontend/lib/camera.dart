@@ -10,7 +10,17 @@ class CameraScreen extends StatefulWidget {
 }
 
 class CameraScreenState extends State<CameraScreen> {
+  final String pickImageHero = 'pickImageHero';
+  final String captureImageHero = 'captureImageHero';
   File? image;
+
+  Future<void> _captureFromCamera() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    setState(() {
+      image = File(pickedFile!.path);
+    });
+  }
 
   Future<void> _pickImagefromGallery() async {
     final pickedImage =
@@ -29,10 +39,26 @@ class CameraScreenState extends State<CameraScreen> {
       body: Center(
         child: image == null ? Text('No Image Selected') : Image.file(image!),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _pickImagefromGallery,
-        tooltip: 'Pick Image',
-        child: Icon(Icons.photo),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Hero(tag: pickImageHero, child: FloatingActionButton(
+            onPressed: _pickImagefromGallery,
+            tooltip: 'Pick Image',
+            child: Icon(Icons.photo),
+          ),),
+          SizedBox(
+            width: 20,
+          ),
+          Hero(
+            tag: captureImageHero,
+            child:
+          FloatingActionButton(
+            onPressed: _captureFromCamera,
+            tooltip: 'Capture Image',
+            child: Icon(Icons.camera),
+          ),),
+        ],
       ),
     );
   }
