@@ -61,7 +61,7 @@ class CameraScreenState extends State<CameraScreen> {
 }
 
 Future<void> uploadImage(File image) async {
-  var url = Uri.parse('htttp://localhost:5000/upload');
+  var url = Uri.parse('htttp://127.0.0.1:5000/upload');
   var request = http.MultipartRequest('POST', url);
   request.files.add(await http.MultipartFile.fromPath('image', image.path));
   var response = await request.send();
@@ -70,4 +70,10 @@ Future<void> uploadImage(File image) async {
   } else {
     print('Image not uploaded');
   }
+}
+
+Future<void> searchBookCover() async {
+  var url = Uri.parse('http://127.0.0.1/5000/search');
+  var response = await http.get(url);
+  
 }
