@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);
@@ -56,5 +57,17 @@ class CameraScreenState extends State<CameraScreen> {
         ],
       ),
     );
+  }
+}
+
+Future<void> uploadImage(File image) async {
+  var url = Uri.parse('htttp://localhost:5000/upload');
+  var request = http.MultipartRequest('POST', url);
+  request.files.add(await http.MultipartFile.fromPath('image', image.path));
+  var response = await request.send();
+  if (response.statusCode == 200) {
+    print('Image uploaded');
+  } else {
+    print('Image not uploaded');
   }
 }
